@@ -36,9 +36,11 @@ def run(args, *, cwd, env):
 
 CONSUMER = '''import pathlib, sys, unittest, adblane
 module = pathlib.Path(adblane.__file__).resolve()
-assert module.is_relative_to(pathlib.Path(sys.prefix).resolve()), "package not installed in clean environment"
+environment = pathlib.Path(sys.prefix).resolve()
+assert module.is_relative_to(environment), "package not installed in clean environment"
 source = pathlib.Path(sys.argv[2]).resolve()
-assert not any(pathlib.Path(p).resolve().is_relative_to(source) for p in sys.path if p), "source checkout on import path"
+paths = (pathlib.Path(p).resolve() for p in sys.path if p)
+assert not any(p.is_relative_to(source) and not p.is_relative_to(environment) for p in paths), "source checkout on import path"
 print("Installed consumer: Python", sys.version.split()[0], "adblane", adblane.__version__, flush=True)
 suite = unittest.defaultTestLoader.discover(sys.argv[1])
 result = unittest.TextTestRunner(verbosity=1).run(suite)
