@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adblane"
+dynamic = ["version"]
+description = "Cancellable ADB sessions with bounded reads and foreground/background scheduling"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = []
+keywords = ["adb", "android", "automation", "subprocess"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Testing",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Source = "https://github.com/SakayanagiYuna/adblane"
+Documentation = "https://github.com/SakayanagiYuna/adblane/blob/master/README.md"
+Issues = "https://github.com/SakayanagiYuna/adblane/issues"
+Changelog = "https://github.com/SakayanagiYuna/adblane/blob/master/CHANGELOG.md"
+
+[tool.setuptools.dynamic]
+version = {attr = "adblane._version.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+adblane = ["py.typed"]

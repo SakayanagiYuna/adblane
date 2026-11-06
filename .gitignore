@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+# Local notes, experiments, and development environments stay private.
+.local/
+.coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
